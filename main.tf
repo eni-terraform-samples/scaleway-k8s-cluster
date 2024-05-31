@@ -8,7 +8,7 @@ data "scaleway_k8s_version" "latest" {
 }
 
 resource "scaleway_k8s_cluster" "cluster" {
-  name = "cluster"
+  name = var.cluster_name
 
   # versions have the form region/version, so trimming the region part
   version = trimprefix(data.scaleway_k8s_version.latest.id, "fr-par/")
@@ -28,6 +28,6 @@ resource "scaleway_k8s_pool" "pool" {
   cluster_id = scaleway_k8s_cluster.cluster.id
 
   name      = "dev1-m-pool"
-  node_type = "DEV1-M"
-  size      = 1
+  node_type = var.node_type
+  size      = var.node_count
 }
