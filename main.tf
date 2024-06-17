@@ -27,7 +27,7 @@ resource "scaleway_k8s_pool" "pool" {
   # referencing the created cluster id
   cluster_id = scaleway_k8s_cluster.cluster.id
 
-  name      = "dev1-m-pool"
+  name      = "${var.node_type}-pool"
   node_type = var.node_type
   size      = var.node_count
 }
